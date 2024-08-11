@@ -13,7 +13,6 @@ MapType mapType = MapType.normal;
 bool trafficMap = true;
 GoogleMapController? _mapController;
 double _currentZoomLevel = 10.0; // Varsayılan zoom seviyesi
-
 void zoomIn() {
 
     _currentZoomLevel++;
@@ -63,10 +62,9 @@ void _getLocation() async {
     return Circle(
       circleId: CircleId('${riskPoint.xKoordinat},${riskPoint.yKoordinat}'),
       center: LatLng(riskPoint.xKoordinat, riskPoint.yKoordinat),
-      radius: riskPoint.kazaSayisi * 10, // Kaza sayısına göre yarıçap belirlenebilir
+      radius: riskPoint.kazaSayisi * 25, // Kaza sayısına göre yarıçap belirlenebilir
       fillColor: riskPoint.kazaSayisi == 1 ? Colors.blue : riskPoint.kazaSayisi <= 3 ? Colors.orange : Colors.red,
-      strokeColor: Colors.red,
-      strokeWidth: 2,
+      strokeWidth: 0,
     );
   }).toSet();
 

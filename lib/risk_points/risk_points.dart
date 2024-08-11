@@ -5,7 +5,7 @@ import 'package:traffic_risk_information_system/risk_points/risk_point.dart';
 Set<RiskPoint> riskPoints = {};
 
 Future<void> fetchRiskPoints() async {
-  final url = 'http://trafik-risk-bilgi-sistemi.rf.gd/api/risk_points.json?i=1'; // Sağlanan URL
+  final url = 'https://www.adresoft.com/api/risk_points.json'; // Sağlanan URL
 
   try {
     final response = await http.get(Uri.parse(url));

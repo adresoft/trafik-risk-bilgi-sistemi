@@ -42,8 +42,8 @@ class RiskPoint {
   // JSON'dan RiskPoint nesnesine dönüştürme
   factory RiskPoint.fromJson(Map<String, dynamic> json) {
     return RiskPoint(
-      xKoordinat: json['xKoordinat'] ?? 0.0,
-      yKoordinat: json['yKoordinat'] ?? 0.0,
+      xKoordinat: (json['xKoordinat'] as num).toDouble(),
+      yKoordinat: (json['yKoordinat'] as num).toDouble(),
       kazaSayisi: json['kazaSayisi'] ?? 0,
       kazaSekli: json['kazaSekli'] != null
           ? List<KazaSekli>.from(json['kazaSekli'].map((item) => KazaSekli.fromJson(item)))
@@ -102,7 +102,7 @@ class KazaSekli {
     return KazaSekli(
       kazaTipi: json['kazaTipi'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -118,7 +118,7 @@ class HavaDurumu {
     return HavaDurumu(
       havaDurumu: json['havaDurumu'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -134,7 +134,7 @@ class Saatler {
     return Saatler(
       saat: json['saat'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -150,7 +150,7 @@ class Tarihler {
     return Tarihler(
       tarih: json['tarih'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -166,7 +166,7 @@ class Mevsimler {
     return Mevsimler(
       mevsim: json['mevsim'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -182,7 +182,7 @@ class YolKaplamaCinsi {
     return YolKaplamaCinsi(
       yolKaplamaCinsi: json['yolKaplamaCinsi'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -198,7 +198,7 @@ class YolSinifi {
     return YolSinifi(
       yolSinifi: json['yolSinifi'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -214,7 +214,7 @@ class GeceGunduz {
     return GeceGunduz(
       geceGunduz: json['geceGunduz'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -230,7 +230,7 @@ class YasalHizLimiti {
     return YasalHizLimiti(
       yasalHizLimiti: json['yasalHizLimiti'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -246,7 +246,7 @@ class KazaSebebi {
     return KazaSebebi(
       kazaSebebi: json['kazaSebebi'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -262,7 +262,7 @@ class CarpismaYeri {
     return CarpismaYeri(
       carpismaYeri: json['carpismaYeri'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -278,7 +278,7 @@ class GeoyatayGuzergah {
     return GeoyatayGuzergah(
       geoyatayGuzergah: json['geoyatayGuzergah'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
@@ -294,7 +294,7 @@ class GeoduseyGuzergah {
     return GeoduseyGuzergah(
       geoduseyGuzergah: json['geoduseyGuzergah'],
       adet: json['Adet'],
-      yuzde: json['%'],
+      yuzde: (json['%'] as num).toDouble(),
     );
   }
 }
