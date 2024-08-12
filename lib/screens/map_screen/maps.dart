@@ -35,11 +35,7 @@ class _MapScreenState extends State<MapScreen> {
             ),
              Align(
               alignment: Alignment.topRight,
-              child: Column(
-                children: [
-                  ButtonWidget(icon: Icons.navigation,),
-                ],
-              ),
+              child: IgnorePointer(ignoring: true,child: ButtonWidget(icon: Icons.navigation,)),
             ),
             Align(
               alignment: Alignment.topLeft,

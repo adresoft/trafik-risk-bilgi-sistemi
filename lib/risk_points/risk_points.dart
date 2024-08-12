@@ -11,20 +11,22 @@ Future<void> fetchRiskPoints() async {
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
+      // Yanıtı UTF-8 olarak çözümleyin
+      final data = utf8.decode(response.bodyBytes);
+
       // Yanıtın JSON formatında olup olmadığını kontrol et
-      if (response.body.startsWith('{') || response.body.startsWith('[')) {
-        final List<dynamic> jsonData = jsonDecode(response.body);
+      if (data.startsWith('{') || data.startsWith('[')) {
+        final List<dynamic> jsonData = jsonDecode(data);
 
         for (var item in jsonData) {
           try {
             riskPoints.add(RiskPoint.fromJson(item));
-            print('RiskPoint eklendi: $item');
           } catch (e) {
             print('RiskPoint nesnesi oluşturulurken hata oluştu: $e');
           }
         }
       } else {
-        print('Beklenen JSON formatında değil: ${response.body}');
+        print('Beklenen JSON formatında değil: $data');
       }
     } else {
       print('API çağrısı başarısız oldu: ${response.statusCode}');
