@@ -30,16 +30,12 @@ class _MapScreenState extends State<MapScreen> {
               child: const GoogleMapsView(),
             ),
             const Align(
-              alignment: Alignment.topCenter,
+              alignment: Alignment.topLeft,
               child: WeatherWidget(),
             ),
              Align(
               alignment: Alignment.topRight,
               child: IgnorePointer(ignoring: true,child: ButtonWidget(icon: Icons.my_location,)),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: ButtonWidget(icon: Icons.sunny)
             ),
             Align(
                 alignment: Alignment.centerLeft,
