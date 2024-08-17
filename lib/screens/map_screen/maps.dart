@@ -35,11 +35,11 @@ class _MapScreenState extends State<MapScreen> {
             ),
              Align(
               alignment: Alignment.topRight,
-              child: IgnorePointer(ignoring: true,child: ButtonWidget(icon: Icons.navigation,)),
+              child: IgnorePointer(ignoring: true,child: ButtonWidget(icon: Icons.my_location,)),
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: ButtonWidget(icon: Icons.directions_car)
+              child: ButtonWidget(icon: Icons.sunny)
             ),
             Align(
                 alignment: Alignment.centerLeft,

@@ -19,6 +19,30 @@ class _SettingsState extends State<Settings> {
   bool blueCheckBox = true;
   bool orangeCheckBox = true;
   bool redCheckBox = true;
+  String _selectedLanguage = 'tr';
+
+  final List<Map<String, String>> _languages = [
+    {'name': 'Türkçe', 'code': 'tr'},
+    {'name': 'English', 'code': 'en'},
+    {'name': 'Deutsch', 'code': 'de'},
+    {'name': 'Русский', 'code': 'ru'},
+    {'name': 'العربية', 'code': 'ar'},
+    {'name': 'Français', 'code': 'fr'},
+    {'name': 'Español', 'code': 'es'},
+    {'name': 'فارسی', 'code': 'fa'},
+    {'name': 'Italiano', 'code': 'it'},
+    {'name': '中文', 'code': 'zh'},
+    {'name': '日本語', 'code': 'ja'},
+    {'name': '한국어', 'code': 'ko'},
+    {'name': 'Nederlands', 'code': 'nl'},
+    {'name': 'Polski', 'code': 'pl'},
+    {'name': 'Українська', 'code': 'uk'},
+    {'name': 'Suomi', 'code': 'fi'},
+    {'name': 'Svenska', 'code': 'sv'},
+    {'name': 'Norsk', 'code': 'no'},
+    {'name': 'Ελληνικά', 'code': 'el'},
+    {'name': 'Български', 'code': 'bg'},
+  ];
   @override
   Widget build(BuildContext context) {
 
@@ -142,6 +166,7 @@ class _SettingsState extends State<Settings> {
               title: Text("Dil Seçenekleri", style: GoogleFonts.quicksand(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),),
               subtitle: Text("Uygulama ve risk uyarılarının dil ayarları", style: GoogleFonts.quicksand(fontSize: 10),),
             ),
+
 
             Container(
               margin: const EdgeInsets.all(8.0),

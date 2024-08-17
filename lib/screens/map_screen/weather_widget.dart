@@ -35,7 +35,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       }
     } catch (e) {
       setState(() {
-        address = "$e";
+        address = "Ankara/Türkiye";
       });
     }
   }
@@ -43,19 +43,19 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 200,
-        height: 50,
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: Center(
-          child: Text(address, style: GoogleFonts.quicksand(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15,),
-            overflow: TextOverflow.ellipsis,),
-        ),
+      width: 200,
+      height: 50,
+      margin: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Center(
+        child: Text(address, style: GoogleFonts.quicksand(
+          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15,),
+          overflow: TextOverflow.ellipsis,),
+      ),
     );
   }
 }

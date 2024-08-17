@@ -71,7 +71,8 @@ class _GoogleMapsViewState extends State<GoogleMapsView> {
   }
 
   void checkProximityToRiskPoints(Position userPosition) {
-    const double thresholdDistance = 100; // 100 metre
+    const double thresholdDistance = 250; // 250 metre
+    bool isNearRiskPoint = false;
 
     for (RiskPoint point in riskPoints) {
       double distance = Geolocator.distanceBetween(
@@ -82,6 +83,7 @@ class _GoogleMapsViewState extends State<GoogleMapsView> {
       );
 
       if (distance <= thresholdDistance) {
+        isNearRiskPoint = true;
         showRiskAlert(point);
         break; // Birden fazla risk noktasına yaklaşılırsa sadece birini göster
       }
@@ -93,36 +95,67 @@ class _GoogleMapsViewState extends State<GoogleMapsView> {
   FlutterTts flutterTts = FlutterTts();
 
   Future<void> speakRiskReason(String reason) async {
-    await flutterTts.setLanguage("tr-TR");
-    await flutterTts.setPitch(1.0);
-    await flutterTts.speak(reason);
-  }
 
+    // Dil ayarı
+    await flutterTts.setLanguage("tr-TR");
+
+    // Ses perdesi (1.0 normal, 0.5 daha kalın, 2.0 daha ince)
+    await flutterTts.setPitch(1.0);
+
+    // Konuşma hızı (1.0 normal hız, 0.5 yavaş, 2.0 hızlı)
+    await flutterTts.setSpeechRate(0.7);
+
+    // Ses türü seçimi (erkek sesi için voiceName genellikle 'male' içeren bir değer olur)
+    await flutterTts.setVoice({'name': 'tr-TR-x-iol-local', 'locale': 'tr-TR'});
+
+    // Volume ayarı (0.0 sessiz, 1.0 maksimum ses)
+    await flutterTts.setVolume(1.0);
+
+    // Metni sesli okuma
+    await flutterTts.speak(reason);
+    await Future.delayed(const Duration(seconds: 5)); // 5 saniye bekle
+    await flutterTts.speak(reason);
+
+  }
 
   // Risk Uyarısı
   int _riskAlertCount = 0;
 
   void showRiskAlert(RiskPoint point) {
-    if (_riskAlertCount < 2) {
-      // Ekranda Container'ı gösterme kodu (context gerekecek)
-      showModalBottomSheet(
+    if (_riskAlertCount < 1) {
+      showDialog(
         context: context,
-        isDismissible: true,
-        enableDrag: true,
+        barrierDismissible: true, // Arka plana tıklayarak kapatılabilir
         builder: (BuildContext context) {
-          return Container(
-            color: Colors.red,
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              point.kazaSekli[0].kazaTipi,
-              style: TextStyle(color: Colors.white, fontSize: 20),
+          return Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              padding: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(16.0),
+              child: Material(
+                color: Colors.black,
+                child: ListTile(
+                  leading: const Icon(Icons.warning, color: Colors.red),
+                  title: Text(
+                    ' ${point.kazaSekli[0].kazaTipi} RİSKİ',
+                    style: GoogleFonts.quicksand(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
             ),
           );
         },
       );
 
       // Kullanıcıya sesli uyarı ver
-      speakRiskReason(point.kazaSekli[0].kazaTipi);
+      speakRiskReason('${point.kazaSekli[0].kazaTipi} RİSKİ!');
 
       _riskAlertCount++;
     }
@@ -201,7 +234,7 @@ class _GoogleMapsViewState extends State<GoogleMapsView> {
             borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
           ),
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2.5,
+          height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
             child: Column(
@@ -234,7 +267,7 @@ class _GoogleMapsViewState extends State<GoogleMapsView> {
                 Column(
                   children: [
                     ListTile(title: Text('Kaza Şekli', style: GoogleFonts.quicksand(color: Colors.white, fontWeight: FontWeight.bold)), // Başlık rengi eklendi
-                      leading: Icon(Icons.car_crash, color: Colors.white)),
+                        leading: Icon(Icons.car_crash, color: Colors.white)),
                     Container(
                       height: point.kazaSekli.length * 50,
                       child: ListView.builder(
@@ -458,7 +491,13 @@ class _GoogleMapsViewState extends State<GoogleMapsView> {
         : GoogleMap(
       onMapCreated: (GoogleMapController controller) {
         _mapController = controller;
-        _mapController?.setMapStyle(_mapStyle);
+        if(darkMode == true){
+          setState(() {
+            _mapController?.setMapStyle(_mapStyle);
+          });
+        }
+
+
       },
       initialCameraPosition: CameraPosition(
         target: _initialPosition!,

@@ -90,7 +90,6 @@ class _ProfileState extends State<Profile> {
                     buildInfoContainer("Yardım & Destek", Icons.question_mark, color: Colors.white),
                     buildInfoContainer("Gizlilik Politikası", Icons.security, color: Colors.white),
                     buildInfoContainer("TEKNOFEST Akıllı Ulaşım Yarışması", Icons.airplanemode_active_outlined, color: Colors.white),
-                    buildInfoContainer("Yasal Bildiri", Icons.warning_rounded, color: Colors.white),
                   ],
                 ),
               ),
